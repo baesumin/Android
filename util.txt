@@ -1,1 +1,2 @@
 http://pojo.sodhanalibrary.com/  POJO class
+https://altongmon.tistory.com/745 retrofit2 예제
