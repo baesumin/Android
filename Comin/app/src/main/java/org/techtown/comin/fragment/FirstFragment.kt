@@ -1,5 +1,6 @@
 package org.techtown.comin.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_first.view.*
 import org.techtown.comin.R
+import org.techtown.comin.fragment.MarketInfo.MarketInfoActivity
 
 class FirstFragment : Fragment() {
 
@@ -25,6 +27,11 @@ class FirstFragment : Fragment() {
 
         val list_adapter = FirstFragAdapter(requireContext(),list_array)
         view.listview_first_fragment.adapter = list_adapter
+        view.listview_first_fragment.setOnItemClickListener { adapterView, view, i, l ->
+            var intent = Intent(requireContext(), MarketInfoActivity::class.java)
+            startActivity(intent)
+        }
+
 
         return view
     }
