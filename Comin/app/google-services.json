@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "950748726436",
+    "project_id": "comin-7d0fc",
+    "storage_bucket": "comin-7d0fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950748726436:android:741645d70fceac9d6f9231",
+        "android_client_info": {
+          "package_name": "org.techtown.comin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950748726436-lf2pe1eupk22vk40bbkn3s06mp0e0l03.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.techtown.comin",
+            "certificate_hash": "cf2f0ab768662fb81206736fa061e86fe9927fa0"
+          }
+        },
+        {
+          "client_id": "950748726436-frhq07egq82sfklhl76jt5h88nfeksms.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJOBhuvkLgQiscJDRcYx23G0Vp2048ThI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950748726436-frhq07egq82sfklhl76jt5h88nfeksms.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

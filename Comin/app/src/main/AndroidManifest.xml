@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fragment.MarketInfo.MarketInfoActivity"></activity>
+        <activity android:name=".Auth.MyCominActivity"></activity>
+        <activity android:name=".Auth.LoginActivity" />
+        <activity android:name=".fragment.MarketInfo.MarketInfoActivity" />
         <activity android:name=".LectureActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.MarketInfo.InfoFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="강의 소개"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="지구에서 제일 쉽게 설명한 자료구조와 알고리즘이라고 강의 제목을 지었습니다.
+이전에 저도 대학교에서 자료구조 수업을 수강했었고, 다양한 온라인 강의를 수강했었습니다.
+
+물론 제가 부족해서 그렇게 느꼈을 수도 있지만, 강의를 진행하시는 분들이 당연히 이렇게 알고리즘이 동작된다고 말씀하시고
+자세한 설명 없이 빠르게 넘어가시는 것을 보고, 많은 아쉬움이 있었습니다.
+
+개인적으로 이번에 자료구조와 알고리즘을 정리하면서, 그 과정을 강의로 만들어 보았습니다.
+많이 부족할 수도 있겠지만, 많은 시간을 들여서 강의를 제작했고
+
+아래와 같이 코드에 한줄한줄 주석을 달았고, 알고리즘이 동작하는 과정을 그림으로 상세히 표현했습니다."
+        />
+
+</FrameLayout>
