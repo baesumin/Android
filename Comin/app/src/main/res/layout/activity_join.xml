@@ -6,4 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".Auth.JoinActivity">
 
+    <EditText
+        android:id="@+id/join_email_area"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="100dp"
+        android:hint="이메일"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/join_password_area"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/join_email_area"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:inputType="textPassword"
+        android:hint="비밀번호"
+        android:layout_height="60dp"/>
+
+    <Button
+        android:id="@+id/join_login_button"
+        android:text="회원가입"
+        android:textColor="#ffffff"
+        android:textSize="15dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/join_password_area"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#92CFBF"
+        android:layout_height="60dp"/>
+
+    <Button
+        android:id="@+id/google_login_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@+id/join_login_button"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#92CFBF"
+        android:text="구글 로그인"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
