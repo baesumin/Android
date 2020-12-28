@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom.*
 import org.techtown.comin.Auth.LoginActivity
 import org.techtown.comin.Auth.MyCominActivity
+import org.techtown.comin.Zzim.ZzimActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -64,6 +65,11 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = ViewPagerAdapter(this)
         viewpager.adapter = adapter
+
+        zzim_icon.setOnClickListener {
+            val intent = Intent(this, ZzimActivity::class.java)
+            startActivity(intent)
+        }
 
         my_page.setOnClickListener {
             if(auth.currentUser == null){

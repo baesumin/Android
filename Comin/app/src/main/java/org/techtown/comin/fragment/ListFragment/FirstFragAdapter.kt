@@ -1,4 +1,4 @@
-package org.techtown.comin.fragment
+package org.techtown.comin.fragment.ListFragment
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -17,7 +17,8 @@ class FirstFragAdapter(var context: Context, val list : ArrayList<ContentsListMo
         if(converView == null){
             view = LayoutInflater.from(context).inflate(R.layout.listview_item,null)
 
-            holder = ViewHolder()
+            holder =
+                ViewHolder()
             holder.view_image1 = view.findViewById(R.id.lv_image_area)
             holder.view_text1 = view.findViewById(R.id.lv_textview_1)
             holder.view_text2 = view.findViewById(R.id.lv_textview_2)
@@ -32,6 +33,7 @@ class FirstFragAdapter(var context: Context, val list : ArrayList<ContentsListMo
 
         val item = list[position]
 
+        holder.view_image1?.setImageResource(item.image)
         holder.view_text1?.text = item.title
 
         return view

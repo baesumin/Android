@@ -7,14 +7,17 @@ import android.view.View
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_lecture.*
 import kotlinx.android.synthetic.main.custom_tab.view.*
-import org.techtown.comin.fragment.FragmentAdapter
+import org.techtown.comin.fragment.ListFragment.FragmentAdapter
 
 class LectureActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lecture)
 
-        val fragmentAdapter = FragmentAdapter(supportFragmentManager)
+        val fragmentAdapter =
+            FragmentAdapter(
+                supportFragmentManager
+            )
         list_viewpager.adapter = fragmentAdapter
 
         tab_layout.addTab(tab_layout.newTab().setCustomView(createTabView("AI")))

@@ -1,4 +1,4 @@
-package org.techtown.comin.fragment
+package org.techtown.comin.fragment.ListFragment
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

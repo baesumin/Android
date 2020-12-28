@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".fragment.MarketInfo.WriteActivity"></activity>
+        <activity android:name=".Zzim.ZzimActivity"></activity>
+        <activity android:name=".fragment.MarketInfo.WriteActivity" />
         <activity android:name=".Auth.JoinInfoActivity" />
         <activity android:name=".Auth.JoinActivity" />
         <activity android:name=".Auth.MyCominActivity" />
