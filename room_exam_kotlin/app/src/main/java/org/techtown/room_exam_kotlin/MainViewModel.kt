@@ -6,6 +6,11 @@ import androidx.lifecycle.LiveData
 import androidx.room.Room
 
 class MainViewModel(application: Application) : AndroidViewModel(Application()){
+    var todos: LiveData<List<Todo?>>?
+    init {
+        todos = getAll()
+    }
+
     private val db = Room.databaseBuilder(
         application,
         AppDatabase::class.java, "database-name"
