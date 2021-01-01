@@ -34,15 +34,15 @@ public class MainActivity extends AppCompatActivity {
         MainViewModel viewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(MainViewModel.class);
         binding.setViewModel(viewModel);
 
-        viewModel.getAll().observe(this, todos -> {
-            //mResultTextView.setText(todos.toString());
-            binding.resultText.setText(todos.toString());
-        });
+//        viewModel.getAll().observe(this, todos -> {
+//            //mResultTextView.setText(todos.toString());
+//            binding.resultText.setText(todos.toString());
+//        });
 
-        //버튼 클릭시 DB에 insert
-        findViewById(R.id.add_button).setOnClickListener(view -> {
-            //viewModel.insert(new Todo(mTodoEditText.getText().toString()));
-            viewModel.insert(new Todo(binding.todoEdit.getText().toString()));
-        });
+//        //버튼 클릭시 DB에 insert
+//        findViewById(R.id.add_button).setOnClickListener(view -> {
+//            //viewModel.insert(new Todo(mTodoEditText.getText().toString()));
+//            viewModel.insert(new Todo(binding.todoEdit.getText().toString()));
+//        });
     }
 }
