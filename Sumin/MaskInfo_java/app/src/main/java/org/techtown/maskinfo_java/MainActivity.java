@@ -2,10 +2,15 @@ package org.techtown.maskinfo_java;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +20,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 
 import org.techtown.maskinfo_java.model.Store;
 import org.techtown.maskinfo_java.model.StoreInfo;
@@ -33,52 +45,66 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getCanonicalName();
+    private  MainViewModel viewModel;
+
+    private FusedLocationProviderClient fusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        PermissionListener permissionlistener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                Toast.makeText(MainActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
+                performAction();
+            }
 
+            @Override
+            public void onPermissionDenied(List<String> deniedPermissions) {
+                Toast.makeText(MainActivity.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+        };
+        TedPermission.with(this)
+                .setPermissionListener(permissionlistener)
+                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+                .setPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
+                .check();
+        performAction();
+        //데이터 요청
+        //viewModel.fetchStoreInfo();
+    }
+
+    @SuppressLint("MissingPermission")
+    private void performAction() {
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+                        }
+                    }
+                });
+
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL,
                 false));
-
         StoreAdapter adapter = new StoreAdapter();
         recyclerView.setAdapter(adapter);
 
-        //통신
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(MaskService.BASE_URL)
-                .addConverterFactory(MoshiConverterFactory.create())
-                .build();
-
-        MaskService service = retrofit.create(MaskService.class);
-
-        Call<StoreInfo> storeInfoCall = service.fetchStoreInfo();
-
-        storeInfoCall.enqueue(new Callback<StoreInfo>() {
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        viewModel.itemLiveData.observe(this, new Observer<List<Store>>() {
             @Override
-            public void onResponse(Call<StoreInfo> call, Response<StoreInfo> response) {
-                List<Store> items = response.body().getStores();
-
-
-
-                adapter.updateItems(items
-                        .stream()
-                        .filter(item -> item.getRemainStat() != null)
-                        .collect(Collectors.toList())
-                );
-                getSupportActionBar().setTitle("마스크 재고 있는 곳: " + items.size() + " ");
-            }
-
-            @Override
-            public void onFailure(Call<StoreInfo> call, Throwable t) {
-                Log.e(TAG, "onFailure: ", t);
+            public void onChanged(List<Store> stores) {
+                adapter.updateItems(stores);
+                getSupportActionBar().setTitle("마스크 재고 있는 곳: "+stores.size());
             }
         });
-
-
     }
 
     @Override
@@ -94,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_refresh:
                 // refresh
-
+                viewModel.fetchStoreInfo();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
