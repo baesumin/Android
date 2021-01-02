@@ -1,2 +1,2 @@
-# Sumin_Android
+# Android
 study android
