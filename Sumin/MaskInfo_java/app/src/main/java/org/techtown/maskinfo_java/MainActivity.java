@@ -19,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         PermissionListener permissionlistener = new PermissionListener() {
             @Override
@@ -87,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
                             // Logic to handle location object
+                            Log.d(TAG, "onSuccess: " + location.getLatitude() + " " + location.getLongitude());
+
+                            viewModel.location = location;
+                            viewModel.fetchStoreInfo();
                         }
                     }
                 });
@@ -97,12 +104,20 @@ public class MainActivity extends AppCompatActivity {
         StoreAdapter adapter = new StoreAdapter();
         recyclerView.setAdapter(adapter);
 
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        //UI 변경 감지 업데이트
         viewModel.itemLiveData.observe(this, new Observer<List<Store>>() {
             @Override
             public void onChanged(List<Store> stores) {
                 adapter.updateItems(stores);
                 getSupportActionBar().setTitle("마스크 재고 있는 곳: "+stores.size());
+            }
+        });
+
+        viewModel.loadingLiveData.observe(this, isLoading ->{
+            if(isLoading){
+                findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+            }else{
+                findViewById(R.id.progressBar).setVisibility(View.GONE);
             }
         });
     }
@@ -169,7 +184,7 @@ class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHolder>{
 
         holder.nameTextView.setText(store.getName());
         holder.addressTextView.setText(store.getAddr());
-        holder.distanceTextView.setText("1.0km");
+        holder.distanceTextView.setText(String.format("%.2fkm",store.getDistance()));
 
         String remainStat = "충분";
         String count = "100개 이상";
