@@ -1,6 +1,22 @@
 <resources>
     <string name="app_name">MakeItRain</string>
-    <string name="you_have">You Have:</string>
-    <string name="test">Hello world</string>
-    <string name="app_info">Get rich, Quick</string>
+    <string name="name">baesumin</string>
+    <string name="my_bio">this is test text.this is test text.this is test text.this is test text.
+        this is test text.this is test text.this is test text.this is test text.this is test text.
+        this is test text.this is test text.this is test text.this is test text.this is test text.
+        this is test text.this is test text.this is test text.this is test text.this is test text.
+        this is test text.this is test text.this is test text.this is test text.this is test text.
+        this is test text.this is test text.this is test text.this is test text.this is test text.
+        this is test text.this is test text.this is test text.this is test text.this is test text.
+        this is test text.this is test text.this is test text.this is test text.this is test text.
+        this is test text.this is test text.this is test text.this is test text.this is test text.
+        this is test text.this is test text.this is test text.this is test text.this is test text.
+        this is test text.this is test text.this is test text.this is test text.this is test text.
+        this is test text.this is test text.this is test text.this is test text.this is test text.
+        this is test text.this is test text.this is test text.this is test text.this is test text.
+        this is test text.this is test text.</string>
+    <string name="hobby_hint_text">Enter your hobbies</string>
+    <string name="done_text">Done</string>
+    <string name="image_description">Android robot image</string>
+    <string name="auto_fill_hints">classical guitar</string>
 </resources>
