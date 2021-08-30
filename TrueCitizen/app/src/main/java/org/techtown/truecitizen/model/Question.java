@@ -2,7 +2,7 @@ package org.techtown.truecitizen.model;
 
 public class Question {
     private int answerResId;
-    private  boolean answerTrue;
+    private boolean answerTrue;
 
     public Question(int answerResId, boolean answerTrue) {
         this.answerResId = answerResId;
