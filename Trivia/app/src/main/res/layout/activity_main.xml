@@ -91,6 +91,20 @@
                 android:text="@string/placeholder"
                 android:textColor="@color/white" />
         </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/score_text"
+            style="@style/MainTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="text"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.548"
+            app:layout_constraintStart_toEndOf="@+id/text_view_out_of"
+            app:layout_constraintTop_toBottomOf="@+id/title_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
