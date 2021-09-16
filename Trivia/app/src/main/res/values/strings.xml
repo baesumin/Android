@@ -5,7 +5,7 @@
     <string name="true_button">True</string>
     <string name="false_button">False</string>
     <string name="next_button">Next</string>
-    <string name="placeholder">Hello world this is where we are going to add the actual text to be shown!</string>
+    <string name="placeholder"></string>
     <string name="correct_answer">Correct</string>
     <string name="incorrect">Incorrect</string>
 </resources>

@@ -17,6 +17,7 @@ import org.techtown.trivia.data.Repository;
 import org.techtown.trivia.databinding.ActivityMainBinding;
 import org.techtown.trivia.model.Question;
 import org.techtown.trivia.model.Score;
+import org.techtown.trivia.util.Prefs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +28,20 @@ public class MainActivity extends AppCompatActivity {
   private int currentQuestionIndex = 0;
   private int scoreCounter = 0;
   private Score score;
+  private Prefs prefs;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+
+
     binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
     score = new Score();
+    prefs = new Prefs(MainActivity.this);
+    currentQuestionIndex = prefs.getState();
+    binding.scoreText.setText("Current Score: " + String.valueOf(score.getScore()));
 
 
     questionList = new Repository().getQuestions(questionArrayList -> {
@@ -44,9 +52,10 @@ public class MainActivity extends AppCompatActivity {
 
     );
 
+
+    binding.highestScoreText.setText("Highest: " + String.valueOf(prefs.getHighestScore()));
     binding.buttonNext.setOnClickListener(v -> {
-      currentQuestionIndex = (currentQuestionIndex + 1) % questionList.size();
-      updateQuestion();
+      getNextQuestion();
     });
     binding.buttonTrue.setOnClickListener(v -> {
       checkAnswer(true);
@@ -56,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
       checkAnswer(false);
       updateQuestion();
     });
+  }
+
+  private void getNextQuestion() {
+    currentQuestionIndex = (currentQuestionIndex + 1) % questionList.size();
+    updateQuestion();
   }
 
   private void checkAnswer(boolean userChoseCorrect) {
@@ -94,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onAnimationEnd(Animation animation) {
         binding.questionTextview.setTextColor(Color.WHITE);
+        getNextQuestion();
       }
 
       @Override
@@ -122,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onAnimationEnd(Animation animation) {
         binding.questionTextview.setTextColor(Color.WHITE);
+        getNextQuestion();
       }
 
       @Override
@@ -136,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
     if (scoreCounter > 0) {
       scoreCounter -= 100;
       score.setScore(scoreCounter);
-      binding.scoreText.setText(String.valueOf(score.getScore()));
+      binding.scoreText.setText("Current Score: " + String.valueOf(score.getScore()));
     } else {
       scoreCounter = 0;
       score.setScore(scoreCounter);
@@ -150,4 +166,10 @@ public class MainActivity extends AppCompatActivity {
     binding.scoreText.setText(String.valueOf(score.getScore()));
   }
 
+  @Override
+  protected void onPause() {
+    prefs.saveHighestScore(score.getScore());
+    prefs.setState(currentQuestionIndex);
+    super.onPause();
+  }
 }
