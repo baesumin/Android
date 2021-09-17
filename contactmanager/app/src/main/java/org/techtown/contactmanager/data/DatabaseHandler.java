@@ -1,14 +1,21 @@
 package org.techtown.contactmanager.data;
 
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import org.techtown.contactmanager.R;
+import org.techtown.contactmanager.model.Contact;
 import org.techtown.contactmanager.util.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -35,5 +42,69 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Create a table again
     onCreate(db);
+  }
+
+  /*
+    CURD
+   */
+  // ADD Contact
+  public void addContact(Contact contact) {
+    SQLiteDatabase db = this.getWritableDatabase();
+
+    ContentValues values = new ContentValues();
+    values.put(Util.KEY_NAME, contact.getName());
+    values.put(Util.KEY_PHONE_NUMBER, contact.getPhoneNumber());
+
+    // Insert to row
+    db.insert(Util.TABLE_NAME, null, values);
+    Log.d("DBHandler", "addContact: " + "item added");
+    db.close();
+  }
+
+  // Get a contact
+  public Contact getContact(int id) {
+    SQLiteDatabase db = this.getReadableDatabase();
+
+    Cursor cursor = db.query(Util.TABLE_NAME,
+            new String[]{Util.KEY_ID, Util.KEY_NAME, Util.KEY_PHONE_NUMBER},
+            Util.KEY_ID + "=?", new String[]{String.valueOf(id)},
+            null, null, null);
+
+    if (cursor != null) {
+      cursor.moveToFirst();
+    }
+
+    Contact contact = new Contact();
+    contact.setId(Integer.parseInt(cursor.getString(0)));
+    contact.setName(cursor.getString(1));
+    contact.setPhoneNumber(cursor.getString(2));
+
+    return contact;
+  }
+
+  // Get all Contacts
+  public List<Contact> getAllContacts() {
+    List<Contact> contactList = new ArrayList<>();
+
+    SQLiteDatabase db = this.getReadableDatabase();
+
+    // Select all contacts
+    String selectAll = "SELECT * FROM " + Util.TABLE_NAME;
+    Cursor cursor = db.rawQuery(selectAll, null);
+
+    // Loop through our data
+    if (cursor.moveToFirst()) {
+      do {
+        Contact contact = new Contact();
+        contact.setId(cursor.getInt(0));
+        contact.setName(cursor.getString(1));
+        contact.setPhoneNumber(cursor.getString(2));
+
+        // add contact objects to our list
+        contactList.add(contact);
+      } while (cursor.moveToNext());
+    }
+
+    return contactList;
   }
 }
