@@ -18,16 +18,28 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
     DatabaseHandler db = new DatabaseHandler(MainActivity.this);
 
+    Log.d("Count", "onCreate: " + db.getCount());
+
     // create contact object first
     Contact jeremy = new Contact();
     jeremy.setName("Jeremy");
     jeremy.setPhoneNumber("987654321");
 
-    //db.addContact(jeremy);
+    Contact j = new Contact();
+    j.setName("jason");
+    j.setPhoneNumber("1234");
+
+    db.addContact(jeremy);
+
+//    Contact c = db.getContact(1);
+//    c.setName("NewJeremy");
+//    c.setPhoneNumber("2323");
+//
+//    int updateRow = db.updateContact(c);
 
     List<Contact> contactList = db.getAllContacts();
 
-    for(Contact contact: contactList){
+    for (Contact contact : contactList) {
       Log.d("MainActivity", "onCreate: " + contact.getName());
     }
   }
