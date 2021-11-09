@@ -18,11 +18,21 @@ public class Contact {
   @ColumnInfo(name = "occupation")
   private String occupation;
 
-  public Contact() {
-  }
 
   public Contact(@NonNull String name, @NonNull String occupation) {
     this.name = name;
+    this.occupation = occupation;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setOccupation(String occupation) {
     this.occupation = occupation;
   }
 

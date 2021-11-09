@@ -3,9 +3,11 @@ package org.techtown.contactroom.util;
 import android.app.Person;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import org.techtown.contactroom.data.ContactDao;
 import org.techtown.contactroom.model.Contact;
@@ -30,6 +32,7 @@ public abstract class ContactRoomDatabase extends RoomDatabase {
         if (INSTANCE == null) {
           INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                   ContactRoomDatabase.class, "contact_database")
+                  .addCallback(sRoomDatabaseCallback)
                   .build();
         }
       }
@@ -37,4 +40,23 @@ public abstract class ContactRoomDatabase extends RoomDatabase {
 
     return INSTANCE;
   }
+
+  private static final RoomDatabase.Callback sRoomDatabaseCallback =
+          new RoomDatabase.Callback(){
+            @Override
+            public void onCreate(@NonNull SupportSQLiteDatabase db) {
+              super.onCreate(db);
+
+              databaseWriteExecutor.execute(()->{
+                ContactDao contactDao = INSTANCE.contactDao();
+                contactDao.deleteAll();
+
+                Contact contact = new Contact("sumin","developer");
+                contactDao.insert(contact);
+
+                contact = new Contact("sm","spy");
+                contactDao.insert(contact);
+              });
+            }
+          }
 }
