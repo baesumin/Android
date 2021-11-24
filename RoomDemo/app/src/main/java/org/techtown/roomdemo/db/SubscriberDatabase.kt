@@ -10,21 +10,38 @@ abstract class SubscriberDatabase : RoomDatabase() {
 
   abstract val subscriberDAO : SubscriberDAO
 
-  companion object{
-    @Volatile
-    private var INSTANCE : SubscriberDatabase? = null
-    fun getInstance(context: Context):SubscriberDatabase{
-      synchronized(this){
-        var instance = INSTANCE
-        if(instance==null){
+  companion object {
+    private var instance: SubscriberDatabase? = null
+
+    @Synchronized
+    fun getInstance(context: Context): SubscriberDatabase? {
+      if (instance == null) {
+        synchronized(SubscriberDatabase::class){
           instance = Room.databaseBuilder(
             context.applicationContext,
             SubscriberDatabase::class.java,
             "subscriber_data_database"
           ).build()
         }
-        return instance
       }
+      return instance
     }
   }
+//  companion object{
+//    @Volatile
+//    private var INSTANCE : SubscriberDatabase? = null
+//    fun getInstance(context: Context):SubscriberDatabase{
+//      synchronized(this){
+//        var instance = INSTANCE
+//        if(instance==null){
+//          instance = Room.databaseBuilder(
+//            context.applicationContext,
+//            SubscriberDatabase::class.java,
+//            "subscriber_data_database"
+//          ).build()
+//        }
+//        return instance
+//      }
+//    }
+//  }
 }
