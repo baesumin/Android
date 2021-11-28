@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/qotna/Desktop/GitHub/Android/NotificationDemo/app/src/main/res/layout/activity_details.xml" value="0.20199275362318841" />
         <entry key="..\:/Users/qotna/Desktop/GitHub/Android/NotificationDemo/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/qotna/Desktop/GitHub/Android/NotificationDemo/app/src/main/res/layout/activity_second.xml" value="0.1875" />
+        <entry key="..\:/Users/qotna/Desktop/GitHub/Android/NotificationDemo/app/src/main/res/layout/activity_settings.xml" value="0.20199275362318841" />
       </map>
     </option>
   </component>
