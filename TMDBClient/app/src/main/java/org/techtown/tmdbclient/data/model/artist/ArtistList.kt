@@ -1,4 +1,4 @@
-package org.techtown.tmdbclient.data
+package org.techtown.tmdbclient.data.model.artist
 
 
 import com.google.gson.annotations.SerializedName
