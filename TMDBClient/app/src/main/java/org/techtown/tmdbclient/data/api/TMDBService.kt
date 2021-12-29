@@ -7,21 +7,15 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-class TMDBService {
+interface TMDBService {
 
   @GET("movie/popular")
-  suspend fun getPopularMovies(@Query("api_key") apiKey: String): Response<MovieList> {
-
-  }
+  suspend fun getPopularMovies(@Query("api_key") apiKey: String): Response<MovieList>
 
   @GET("tv/popular")
-  suspend fun getPopularTvshows(@Query("api_key") apiKey: String): Response<TvShowList> {
-
-  }
+  suspend fun getPopularTvshows(@Query("api_key") apiKey: String): Response<TvShowList>
 
   @GET("person/popular")
-  suspend fun getPopularTvArtists(@Query("api_key") apiKey: String): Response<ArtistList> {
-
-  }
+  suspend fun getPopularTvArtists(@Query("api_key") apiKey: String): Response<ArtistList>
 
 }
