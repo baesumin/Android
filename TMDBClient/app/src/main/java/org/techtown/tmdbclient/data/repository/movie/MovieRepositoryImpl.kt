@@ -1,4 +1,4 @@
-package org.techtown.tmdbclient.data.repository.movie.datasourceImpl
+package org.techtown.tmdbclient.data.repository.movie
 
 import android.util.Log
 import org.techtown.tmdbclient.data.model.movie.Movie
